@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>[Bài tập] Phát triển chương trình sử dụng Remote để điều khiển TiVi</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<script>
+    var Remote = function (channel, volume) {
+        this.volume = volume;
+        this.channel = channel;
+        this.getVolume = function () {
+            return this.volume;
+        };
+        this.setVolume = function (vol) {
+            this.volume = vol;
+        };
+        this.getChannel = function () {
+            return this.channel;
+        };
+        this.setChannel = function (chan) {
+            this.channel = chan;
+        };
+        this.turnOn = function () {
+            this.status = true;
+        };
+        this.turnOff = function () {
+            this.status = false;
+        };
+        this.powerRemote = function () {
+            if (this.status){
+                alert("Bật ti vi");
+            } else {
+                alert("Tắt vi vi");
+            }
+        }
+    };
+    var TV = function (channel1, volume1) {
+        this.volume1 = volume1;
+        this.channel1 = channel1;
+        this.status = false;
+        this.remoteTv = new Remote();
+        console.log(channel1);
+        console.log(volume1);
+        this.getVolume1 = function () {
+            return this.remoteTv.getVolume();
+        };
+        this.setVolume1 = function (x) {
+            return this.remoteTv.setVolume(x);
+        };
+        this.getChannel1 = function () {
+           return this.remoteTv.getChannel();
+        };
+        this.setChannel1 = function (x) {
+            return this.remoteTv.setChannel(x);
+        };
+        this.turnOnTV = function () {
+            return this.remoteTv.turnOn();
+        };
+        this.turnOffTV = function () {
+            return this.remoteTv.turnOff();
+        };
+        this.powerTV = function () {
+          return myTV.remoteTv.powerRemote();
+        }
+
+    };
+
+    var myTV = new TV(6, 7);
+    myTV.turnOnTV();
+    myTV.powerTV();
+    var channelTV = myTV.channel1;
+    alert("Kênh hiện thời đang phát là: " + channelTV );
+    var volumeTV = myTV.volume1;
+    alert("Âm lượng hiện thời đang phát là: " + volumeTV);
+    myTV.setChannel1(7);
+    var set7 = myTV.getChannel1();
+    alert("Sau khi chuyển kênh");
+    alert("Kênh hiện thời đang phát là: "+set7 );
+    alert("Sau khi chuyển kênh");
+    myTV.setChannel1(3);
+    var set3 = myTV.getChannel1();
+    alert("Kênh hiện thời đang phát là: " +set3 );
+    myTV.setVolume1(9);
+    alert("Sau khi tăng âm lượng");
+    var setV9 = myTV.getVolume1();
+    alert("Âm lượng đang phát là: " +setV9);
+    myTV.turnOffTV();
+    myTV.powerTV();
+
+
+
+</script>
+</body>
+</html>
